@@ -1,30 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import type { Participant } from '@/types'
-import ParticipantService from '@/services/ParticipantService'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-const participant = ref<Participant>()
-const props = defineProps<{ id: string }>()
-const id = Number(props.id)
-ParticipantService.getParticipant(id)
-  .then((response) => {
-    participant.value = response.data
-  })
-  .catch((error) => {
-    console.error('There was an error!', error)
-    router.push({ name: '404-resource-view', params: { resource: 'participant' } })
-  })
+import { useParticipantStore } from '@/stores/participant'
+import { storeToRefs } from 'pinia'
+const store = useParticipantStore()
+const { participant } = storeToRefs(store)
 </script>
 <template>
   <div v-if="participant">
     <nav>
-      <router-link :to="{ name: 'participant-detail-view', params: { id: props.id } }"
+      <router-link :to="{ name: 'participant-detail-view', params: { id: participant.id } }"
         >Details</router-link
       >
       |
-      <router-link :to="{ name: 'participant-edit-view', params: { id: props.id } }"
+      <router-link :to="{ name: 'participant-edit-view', params: { id: participant.id } }"
         >Edit</router-link
       >
     </nav>
