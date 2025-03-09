@@ -3,6 +3,7 @@ import { ref, computed, watchEffect } from 'vue'
 import ParticipantCard from '@/components/ParticipantCard.vue'
 import ParticipantService from '@/services/ParticipantService'
 import type { Participant } from '@/types'
+import { useRouter } from 'vue-router'
 
 interface PartitipantResponse {
   data: Participant[]
@@ -11,6 +12,7 @@ interface Props {
   page: number
 }
 
+const router = useRouter()
 const participants = ref<Participant[]>([])
 const props = defineProps<Props>()
 const page = computed(() => props.page)
@@ -26,8 +28,8 @@ watchEffect(() => {
       participants.value = response.data
       totalPaticipants.value = response.headers['x-total-count']
     })
-    .catch((error) => {
-      console.error('There was an error!', error)
+    .catch(() => {
+      router.push({ name: 'network-error-view' })
     })
 })
 

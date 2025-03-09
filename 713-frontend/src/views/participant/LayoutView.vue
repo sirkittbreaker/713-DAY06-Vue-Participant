@@ -2,7 +2,9 @@
 import { ref } from 'vue'
 import type { Participant } from '@/types'
 import ParticipantService from '@/services/ParticipantService'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const participant = ref<Participant>()
 const props = defineProps<{ id: string }>()
 const id = Number(props.id)
@@ -12,6 +14,7 @@ ParticipantService.getParticipant(id)
   })
   .catch((error) => {
     console.error('There was an error!', error)
+    router.push({ name: '404-resource-view', params: { resource: 'participant' } })
   })
 </script>
 <template>
