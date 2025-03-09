@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { Participant } from '@/types'
+import ParticipantService from '@/services/ParticipantService'
+
 const participant = ref<Participant>()
+const id = ref<number>(1)
+ParticipantService.getParticipant(id.value)
+  .then((response) => {
+    participant.value = response.data
+  })
+  .catch((error) => {
+    console.error('There was an error!', error)
+  })
 </script>
 <template>
   <div v-if="participant">

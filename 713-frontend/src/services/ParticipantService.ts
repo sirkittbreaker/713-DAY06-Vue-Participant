@@ -12,4 +12,7 @@ export default {
   getParticipants() {
     return apiClient.get('/participants')
   },
+  getParticipant(id: number) {
+    return apiClient.get(`/participants/${id}`)
+  },
 }
