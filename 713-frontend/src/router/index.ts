@@ -5,6 +5,7 @@ import ParticipantDetailView from '@/views/participant/DetailView.vue'
 import ParticipantEditView from '@/views/participant/EditView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
+import nProgress from 'nprogress'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,13 @@ const router = createRouter({
       ],
     },
   ],
+})
+router.beforeEach(() => {
+  nProgress.start()
+})
+
+router.afterEach(() => {
+  nProgress.done()
 })
 
 export default router
