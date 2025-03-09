@@ -12,6 +12,10 @@ const participants = ref([
 
 <template>
   <div>
-    <ParticipantCard v-for="participant in participants" :key="participant.id" />
+    <ParticipantCard
+      v-for="participant in participants"
+      :key="participant.id"
+      :name="participant.name"
+    />
   </div>
 </template>

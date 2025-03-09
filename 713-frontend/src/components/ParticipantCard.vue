@@ -1,8 +1,17 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+withDefaults(
+  defineProps<{
+    name: string
+  }>(),
+  {
+    name: 'default name',
+  },
+)
+</script>
 
 <template>
   <div class="participant-card">
-    <h1>This is an participant page</h1>
+    <h1>This is an {{ name }} page</h1>
   </div>
 </template>
 
