@@ -24,3 +24,7 @@ export interface Participant {
   email: string
   events: Event[]
 }
+
+export interface MessageState {
+  message: string
+}

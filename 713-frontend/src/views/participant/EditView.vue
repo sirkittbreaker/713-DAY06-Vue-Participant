@@ -2,6 +2,7 @@
 import { toRefs } from 'vue'
 import type { Participant } from '@/types'
 import { useRouter } from 'vue-router'
+import { useMessageStore } from '@/stores/message'
 
 const router = useRouter()
 const props = defineProps<{
@@ -9,8 +10,14 @@ const props = defineProps<{
   id: string
 }>()
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const store = useMessageStore()
 const { participant } = toRefs(props)
 const edit = () => {
+  store.updateMessage('You are successully edited for ' + props.participant.name)
+  setTimeout(() => {
+    store.resetMessage()
+  }, 3000)
+
   router.push({ name: 'participant-detail-view' })
 }
 </script>
