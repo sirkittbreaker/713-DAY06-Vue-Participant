@@ -1,17 +1,26 @@
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    name: string
-  }>(),
-  {
-    name: 'default name',
-  },
-)
+import type { Participant } from '@/types'
+
+defineProps<{ participant: Participant }>()
 </script>
 
 <template>
-  <div class="participant-card">
-    <h1>This is an {{ name }} page</h1>
+  <div class="participant-class">
+    <div class="participant-card">
+      <h2>{{ participant.name }}</h2>
+      <p>{{ participant.email }}</p>
+      <!-- <h3>Events</h3>
+      <ul>
+        <li v-for="event in participant.events" :key="event.id">
+          <h4>{{ event.title }}</h4>
+          <p>{{ event.description }}</p>
+          <p>{{ event.location }}</p>
+          <p>{{ event.date }} at {{ event.time }}</p>
+          <p v-if="event.petsAllowed">Pets allowed</p>
+          <p>Organized by {{ event.organizer.name }}</p>
+        </li>
+      </ul> -->
+    </div>
   </div>
 </template>
 
