@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import ParticipantCard from '@/components/ParticipantCard.vue'
 import ParticipantService from '@/services/ParticipantService'
 import type { Participant } from '@/types'
 
-const participants = ref<Participant[]>([])
 interface PartitipantResponse {
   data: Participant[]
 }
-ParticipantService.getParticipants().then((response: PartitipantResponse) => {
+interface Props {
+  page: number
+}
+
+const participants = ref<Participant[]>([])
+const props = defineProps<Props>()
+const page = computed(() => props.page)
+
+ParticipantService.getParticipants(page.value, 2).then((response: PartitipantResponse) => {
   participants.value = response.data
 })
 </script>

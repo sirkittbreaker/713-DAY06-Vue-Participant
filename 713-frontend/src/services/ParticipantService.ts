@@ -9,8 +9,8 @@ const apiClient = axios.create({
 })
 
 export default {
-  getParticipants() {
-    return apiClient.get('/participants')
+  getParticipants(pageNo: number, pageSize: number) {
+    return apiClient.get('/participants?pageNo=' + pageNo + '&pageSize=' + pageSize)
   },
   getParticipant(id: number) {
     return apiClient.get(`/participants/${id}`)

@@ -9,6 +9,9 @@ const router = createRouter({
       path: '/',
       name: 'participant-list-view',
       component: ParticipantListView,
+      props: (route) => ({
+        page: parseInt(route.query.page as string) || 1,
+      }),
     },
     {
       path: '/about',
