@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ParticipantListView from '@/views/ParticipantListView.vue'
-import ParticipantDetailView from '@/views/ParticipantDetailView.vue'
+import ParticipantLayoutView from '@/views/participant/LayoutView.vue'
+import ParticipantDetailView from '@/views/participant/DetailView.vue'
+import ParticipantEditView from '@/views/participant/EditView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,9 +25,23 @@ const router = createRouter({
     },
     {
       path: '/participant/:id',
-      name: 'participant-detail-view',
-      component: ParticipantDetailView,
+      name: 'participant-layout-view',
+      component: ParticipantLayoutView,
       props: true,
+      children: [
+        {
+          path: '',
+          name: 'participant-detail-view',
+          component: ParticipantDetailView,
+          props: true,
+        },
+        {
+          path: 'edit',
+          name: 'participant-edit-view',
+          component: ParticipantEditView,
+          props: true,
+        },
+      ],
     },
   ],
 })

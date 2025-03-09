@@ -16,18 +16,16 @@ ParticipantService.getParticipant(id)
 </script>
 <template>
   <div v-if="participant">
-    <h1>{{ participant.name }}</h1>
-    <p>{{ participant.email }}</p>
-    <h3>Events</h3>
-    <ul>
-      <li v-for="event in participant.events" :key="event.id">
-        <h4>{{ event.title }}</h4>
-        <p>{{ event.description }}</p>
-        <p>{{ event.location }}</p>
-        <p>{{ event.date }} at {{ event.time }}</p>
-        <p v-if="event.petsAllowed">Pets allowed</p>
-      </li>
-    </ul>
+    <nav>
+      <router-link :to="{ name: 'participant-detail-view', params: { id: props.id } }"
+        >Details</router-link
+      >
+      |
+      <router-link :to="{ name: 'participant-edit-view', params: { id: props.id } }"
+        >Edit</router-link
+      >
+    </nav>
+    <router-view :participant="participant"></router-view>
   </div>
   <div v-else>
     <p>Loading...</p>
