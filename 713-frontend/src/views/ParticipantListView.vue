@@ -14,18 +14,24 @@ interface Props {
 const participants = ref<Participant[]>([])
 const props = defineProps<Props>()
 const page = computed(() => props.page)
+const totalPaticipants = ref(0)
+const hasNextPage = computed(() => {
+  const totalPages = Math.ceil(totalPaticipants.value / 2)
+  return page.value < totalPages
+})
 
 watchEffect(() => {
   ParticipantService.getParticipants(page.value, 2)
-    .then((response: PartitipantResponse) => {
+    .then((response) => {
       participants.value = response.data
+      totalPaticipants.value = response.headers['x-total-count']
     })
     .catch((error) => {
       console.error('There was an error!', error)
     })
 })
 
-ParticipantService.getParticipants(page.value, 2).then((response: PartitipantResponse) => {
+ParticipantService.getParticipants(page.value, 2).then((response) => {
   participants.value = response.data
 })
 </script>
@@ -52,6 +58,7 @@ ParticipantService.getParticipants(page.value, 2).then((response: PartitipantRes
         id="page-next"
         :to="{ name: 'participant-list-view', query: { page: page + 1 } }"
         rel="next"
+        v-if="hasNextPage"
         >Next Page</RouterLink
       >
     </div>
