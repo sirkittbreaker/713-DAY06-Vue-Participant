@@ -5,7 +5,10 @@ defineProps<{ participant: Participant }>()
 </script>
 
 <template>
-  <RouterLink :to="{ name: 'participant-detail-view', params: { id: participant.id } }">
+  <RouterLink
+    class="participant-link"
+    :to="{ name: 'participant-detail-view', params: { id: participant.id } }"
+  >
     <div class="participant-card">
       <h2>{{ participant.name }}</h2>
     </div>
@@ -23,5 +26,9 @@ defineProps<{ participant: Participant }>()
 .participant-card:hover {
   transform: scale(1.01);
   box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.2);
+}
+.participant-link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
