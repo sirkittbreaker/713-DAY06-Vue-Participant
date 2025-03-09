@@ -4,8 +4,9 @@ import type { Participant } from '@/types'
 import ParticipantService from '@/services/ParticipantService'
 
 const participant = ref<Participant>()
-const id = ref<number>(1)
-ParticipantService.getParticipant(id.value)
+const props = defineProps<{ id: string }>()
+const id = Number(props.id)
+ParticipantService.getParticipant(id)
   .then((response) => {
     participant.value = response.data
   })
