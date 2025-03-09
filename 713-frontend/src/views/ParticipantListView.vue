@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ParticipantCard from '@/components/ParticipantCard.vue'
+</script>
 
 <template>
-  <div></div>
+  <div>
+    <ParticipantCard />
+  </div>
 </template>
