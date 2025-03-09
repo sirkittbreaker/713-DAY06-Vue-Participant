@@ -18,12 +18,12 @@ const props = defineProps<Props>()
 const page = computed(() => props.page)
 const totalPaticipants = ref(0)
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalPaticipants.value / 2)
+  const totalPages = Math.ceil(totalPaticipants.value / 3)
   return page.value < totalPages
 })
 
 watchEffect(() => {
-  ParticipantService.getParticipants(page.value, 2)
+  ParticipantService.getParticipants(page.value, 3)
     .then((response) => {
       participants.value = response.data
       totalPaticipants.value = response.headers['x-total-count']
@@ -33,7 +33,7 @@ watchEffect(() => {
     })
 })
 
-ParticipantService.getParticipants(page.value, 2).then((response) => {
+ParticipantService.getParticipants(page.value, 3).then((response) => {
   participants.value = response.data
 })
 </script>
