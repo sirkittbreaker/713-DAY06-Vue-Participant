@@ -84,6 +84,8 @@ const participants = ref([
 </script>
 
 <template>
+  <h1>Participants For Good</h1>
+
   <div class="participants">
     <ParticipantCard
       v-for="participant in participants"
